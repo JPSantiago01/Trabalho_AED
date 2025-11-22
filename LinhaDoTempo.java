@@ -1,3 +1,15 @@
+package br.edu.icev.aed.forense;
+
+import java.io.*;
+import java.util.*;
+
+public class MinhaAnaliseForense implements AnaliseForenseAvancada {
+    
+    class Evento {
+        long timestamp;
+        long bytes;
+        public Evento(long t, long b) { timestamp = t; bytes = b; }
+    }
 @Override
 public List<String> desafio2_ReconstituirLinhaDoTempo(String caminhoArquivoCsv, String sessionId) {
     List<String> lista = new ArrayList<>();

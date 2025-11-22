@@ -1,0 +1,5 @@
+# Compilar
+javac -cp "analise-forense-api.jar" MinhaAnaliseForense.java
+
+# Criar .jar
+jar cfm 123456_789012_345678.jar MANIFEST.MF MinhaAnaliseForense.class

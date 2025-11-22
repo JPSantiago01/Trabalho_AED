@@ -8,7 +8,10 @@ public class MinhaAnaliseForense implements AnaliseForenseAvancada {
     class Evento {
         long timestamp;
         long bytes;
-        public Evento(long t, long b) { timestamp = t; bytes = b; }
+        public Evento(long t, long b) {
+            timestamp = t;
+            bytes = b;
+        }
     }
 @Override
 public List<String> desafio2_ReconstituirLinhaDoTempo(String caminhoArquivoCsv, String sessionId) {

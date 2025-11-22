@@ -47,3 +47,47 @@ public List<String> desafio2_ReconstituirLinhaDoTempo(String caminhoArquivoCsv, 
 
     return lista;
 }
+@Override
+public Map<Long, Long> desafio4_encontrarPicosTransferencia(String caminhoArquivoCsv) {
+    Map<Long, Long> resultado = new HashMap<>();
+    Stack<Evento> pilha = new Stack<>();
+    List<Evento> eventos = new ArrayList<>();
+
+    try (BufferedReader leitor = new BufferedReader(new FileReader(caminhoArquivoCsv))) {
+        leitor.readLine();
+        String linha = leitor.readLine();
+        
+        while (linha != null) {
+            String[] col = linha.split(",");
+            if (col.length >= 7) {
+                try {
+                    long timestamp = Long.parseLong(col[0].trim());
+                    long bytes = Long.parseLong(col[6].trim());
+                    if (bytes > 0) {
+                        eventos.add(new Evento(timestamp, bytes));
+                    }
+                } catch (NumberFormatException e) {
+                }
+            }
+            linha = leitor.readLine();
+        }
+    } catch (IOException e) {
+        System.err.println("Erro ao ler arquivo: " + e.getMessage());
+    }
+    
+    for (int i = eventos.size() - 1; i >= 0; i--) {
+        Evento atual = eventos.get(i);
+        
+        while (!pilha.isEmpty() && pilha.peek().bytes <= atual.bytes) {
+            pilha.pop();
+        }
+        
+        if (!pilha.isEmpty()) {
+            resultado.put(atual.timestamp, pilha.peek().timestamp);
+        }
+        
+        pilha.push(atual);
+    }
+    
+    return resultado;
+}

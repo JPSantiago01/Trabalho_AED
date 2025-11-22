@@ -49,20 +49,20 @@ public List<String> desafio2_ReconstituirLinhaDoTempo(String caminhoArquivoCsv, 
 }
 @Override
 public Map<Long, Long> desafio4_encontrarPicosTransferencia(String caminhoArquivoCsv) {
-    Map<Long, Long> resultado = new HashMap<>();
+    Map<Long, Long> lista = new HashMap<>();
     Stack<Evento> pilha = new Stack<>();
     List<Evento> eventos = new ArrayList<>();
 
     try (BufferedReader leitor = new BufferedReader(new FileReader(caminhoArquivoCsv))) {
         leitor.readLine();
-        String linha = leitor.readLine();
+        String linhaAtual = leitor.readLine();
         
-        while (linha != null) {
-            String[] col = linha.split(",");
-            if (col.length >= 7) {
+        while (linhaAtual != null) {
+            String[] coluna = linha.split(",");
+            if (coluna.length >= 7) {
                 try {
-                    long timestamp = Long.parseLong(col[0].trim());
-                    long bytes = Long.parseLong(col[6].trim());
+                    long timestamp = Long.parseLong(coluna[0].trim());
+                    long bytes = Long.parseLong(coluna[6].trim());
                     if (bytes > 0) {
                         eventos.add(new Evento(timestamp, bytes));
                     }
@@ -89,5 +89,5 @@ public Map<Long, Long> desafio4_encontrarPicosTransferencia(String caminhoArquiv
         pilha.push(atual);
     }
     
-    return resultado;
+    return lista;
 }
